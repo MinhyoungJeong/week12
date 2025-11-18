@@ -7,12 +7,14 @@
 
 #ifndef BOARD_H
 #define BOARD_H
+#define N_BOARD 20
 
-int board_initBoard(void);
+void board_initBoard(void);
 int board_getBoardStatus(int pos);
 int board_getSharkPosition(void);
 int board_stepShark(void);
 int board_getBoardCoin(int pos);
 void board_printBoardStatus(void);
+int rolldie(void);
 
 #endif
