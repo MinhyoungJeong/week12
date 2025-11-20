@@ -18,11 +18,27 @@ int rolldie(void);
 #define BOARDSTATUS_NOK 0
 #define N_COINPOS 12
 #define MAX_COIN 4
+#define MAX_SHARKSTEP
 #define MAX_DIE 6
+#define SHARK_INITPOS -4
+
 
 static int board_status[N_BOARD];
 static int board_coin[N_BOARD];
 static int shark_position;
+
+
+int board_stepShark(void){
+    int step = rand()%MAX_SHARKSTEP +1;
+    int i;
+    
+    for (i=0; i<step; i++){
+        int posIdx = shark_position + i+1;
+        board_status[posIdx] = BOARDSTATUS_NOK;
+    }
+    shark_position += step;
+}
+
 
 int rolldie(void)
 {
@@ -49,13 +65,15 @@ int board_getBoardStatus(int pos) {
 }
 
 int board_getBoardCoin(int pos)
-{    
+{
     int value = board_coin[pos];  // 현재 코인 값 저장
     board_coin[pos] = 0;          // 코인을 주웠으니 칸은 비움
     return value;                 // 주운 코인 값 반환
 }
 
 void board_initBoard(void) {
+    
+    
     for (int i=0; i<N_BOARD; i++){
         board_status[i] = BOARDSTATUS_OK;
         board_coin[i] = BOARDSTATUS_NOK;
