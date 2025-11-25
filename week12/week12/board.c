@@ -34,14 +34,20 @@ int board_stepShark(void){
     for (i=0; i<step; i++){
         int posIdx = shark_position + i+1;
         
-        if (posIdx >= 0)
+        if (posIdx >= 0 && posIdx < N_BOARD) {
+            board_status[posIdx] = BOARDSTATUS_NOK;
+        }
+        //  if (posIdx >= 0)
+        //  board_status[posIdx] = BOARDSTATUS_NOK;
+        // }
+        if (shark_position >= N_BOARD) {
+            shark_position = N_BOARD - 1;  // 필요하면 이렇게 막아주기
+        }
         
-        board_status[posIdx] = BOARDSTATUS_NOK;
+        shark_position += step;
     }
-    shark_position += step;
     return shark_position;
 }
-
 
 int rolldie(void)
 {
@@ -76,7 +82,6 @@ int board_getBoardCoin(int pos)
 
 void board_initBoard(void) {
     
-    int i;
     shark_position = SHARK_INITPOS;
     
     for (int i=0; i<N_BOARD; i++){

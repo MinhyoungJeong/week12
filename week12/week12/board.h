@@ -19,6 +19,6 @@ int board_stepShark(void);
 int board_getBoardCoin(int pos);
 void board_printBoardStatus(void);
 int rolldie(void);
-void initPlayer(void);
+
 
 #endif
